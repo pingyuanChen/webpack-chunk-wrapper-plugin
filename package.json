@@ -1,0 +1,29 @@
+{
+  "name": "webpack-chunk-wrapper-plugin",
+  "version": "1.0.0",
+  "description": "Append or Prepend strings to chunks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pingyuanChen/webpack-chunk-wrapper-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "plugin",
+    "wrapper",
+    "Append",
+    "Prepend"
+  ],
+  "author": "pychen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pingyuanChen/webpack-chunk-wrapper-plugin/issues"
+  },
+  "homepage": "https://github.com/pingyuanChen/webpack-chunk-wrapper-plugin",
+  "dependencies": {
+    "webpack": "^3.4.1"
+  }
+}
