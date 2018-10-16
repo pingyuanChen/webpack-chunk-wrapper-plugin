@@ -39,7 +39,7 @@ class ChunksWrapperPlugin {
     }
 
     function wrapChunks(compilation, chunks, options) {
-      chunks.forEach(chunk => {
+      chunks.forEach(function(chunk) {
         chunk.files.forEach(function(fileName) {
           const foundOption = findMatchTester(fileName, options);
           if (foundOption) {
@@ -53,7 +53,7 @@ class ChunksWrapperPlugin {
     function findMatchTester(fileName, options) {
       for (let i = 0, l = options.length; i < l; i++) {
         const option = options[i];
-        const tester = option.test;
+        const tester = { test: option.test };
         if (ModuleFilenameHelpers.matchObject(tester, fileName)) {
           return option;
         }
