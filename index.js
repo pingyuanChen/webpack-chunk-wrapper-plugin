@@ -30,12 +30,50 @@ class ChunksWrapperPlugin {
     function wrapFile(compilation, fileName, { header, footer }) {
       var headerContent = header || "";
       var footerContent = footer || "";
+      if (typeof headerContent === "string") {
+        headerContent = [String(headerContent)];
+      } else {
+        headerContent = wrapChildChunk(compilation, headerContent);
+      }
+      if (typeof footerContent === "string") {
+        footerContent = [String(footerContent)];
+      } else {
+        footerContent = wrapChildChunk(compilation, footerContent);
+      }
 
-      compilation.assets[fileName] = new ConcatSource(
-        String(headerContent),
-        compilation.assets[fileName],
-        String(footerContent)
+      const concatedString = headerContent
+        .concat(compilation.assets[fileName])
+        .concat(footerContent);
+
+      compilation.assets[fileName] = new ConcatSource(...concatedString);
+    }
+
+    function wrapChildChunk(compilation, { chunkName, header, footer }) {
+      const childChunkFileName = calcChunkFileNameByName(
+        compilation.chunks,
+        chunkName
       );
+      if (childChunkFileName) {
+        var headerContent = header || "";
+        var footerContent = footer || "";
+
+        return [
+          String(headerContent),
+          compilation.assets[childChunkFileName],
+          String(footerContent)
+        ];
+      }
+      return [String("")];
+    }
+
+    function calcChunkFileNameByName(chunks, chunkName) {
+      for (let i = 0, l = chunks.length; i < l; i++) {
+        const chunk = chunks[i];
+        if (chunk.name === chunkName) {
+          return chunk.files[0];
+        }
+      }
+      return "";
     }
 
     function wrapChunks(compilation, chunks, options) {

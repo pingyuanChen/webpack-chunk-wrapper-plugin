@@ -1,6 +1,6 @@
 {
   "name": "webpack-chunk-wrapper-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Append or Prepend strings to chunks",
   "main": "index.js",
   "scripts": {
